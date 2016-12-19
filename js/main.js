@@ -18,9 +18,13 @@ function equate(){
 		
 		var firstPartEquation = $("#eq-entry").val();
 		var lastPartEquation = $("#digits-entry").val();
-		var fullEquation = firstPartEquation + lastPartEquation;
-
-		console.log(fullEquation);
+		
+		if ( firstPartEquation != "0" && lastPartEquation != "0"){
+			var fullEquation = firstPartEquation + lastPartEquation;
+			console.log(fullEquation);
+		}else{
+			console.log("equated on default ...");
+		}
 	});
 }
 
