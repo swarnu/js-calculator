@@ -1,4 +1,23 @@
 
+function letsDivide(eq){
+	var divEqArr = eq.match(/([0-9])+\/([0-9])+/);
+	var ans;
+	divEqArr.forEach(function(divWork){
+		var operands = divWork.split("/");
+		var divAns = parseInt(operands[0]) / parseInt(operands[1]);
+		var regexor = "/" + operands[0] + "\/" + operands[1] + "/";
+		//console.log(regexor);
+		eq = eq.replace(regexor, divAns); 
+	});
+	ans = eq
+	console.log(ans);
+	return ans;
+}
+
+function answerThis(eq){
+	var answer = letsDivide(eq)
+}
+
 function joinInEquation(equation, allDigits, operate){
 	if (equation == "0" || equation == ""){
 		$("#eq-entry").val(allDigits + operate );
@@ -10,19 +29,18 @@ function joinInEquation(equation, allDigits, operate){
 
 
 function equate(){
-	console.log("equate() ran...");
 	
 	$("button#equate").click(function(){
 		
-		console.log("equate clicked...");
 		
 		var firstPartEquation = $("#eq-entry").val();
 		var lastPartEquation = $("#digits-entry").val();
 		
-		if ( firstPartEquation != "0" && lastPartEquation != "0"){
-			var fullEquation = firstPartEquation + lastPartEquation;
-			console.log(fullEquation);
-		}else{
+		if ( firstPartEquation != "0" && lastPartEquation != "0"){			
+			var fullEquation = firstPartEquation + lastPartEquation;		
+			answerThis(fullEquation);
+		}
+		else{
 			console.log("equated on default ...");
 		}
 	});
@@ -30,7 +48,7 @@ function equate(){
 
 
 function operatorInput(){
-	console.log("operatorInput() running ....");
+	
 	$(".op").click(function(){
 		
 		var operate = $(this).attr("value");
@@ -44,7 +62,6 @@ function operatorInput(){
 }
 
 function numberClear() {
-	console.log("numberClear() running ...");
 	$(".clearer").click(function(){
 		if($(this).attr("value") == "ac"){
 			$("#eq-entry").val("0");
@@ -55,15 +72,11 @@ function numberClear() {
 }
 
 function numberInput(){
-	console.log("Running Number Input")
 	$(".num").click(function(){
-		console.log("num clicked");
 		
 		var digit = $(this).attr("value");
-		console.log(digit);
 		
 		var digitEntry = $("#digits-entry").val();
-		console.log(digitEntry);
 		
 		if ( (digit == "." && digitEntry == "0") || (digit == "." && digitEntry == "") ) {
 			$("#digits-entry").val( "0" + digit);
@@ -79,7 +92,6 @@ function numberInput(){
 
 
 function calculate() {
-	console.log("Running Calculate");
 	numberInput();
 	operatorInput();
 	numberClear();
